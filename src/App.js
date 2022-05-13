@@ -5,6 +5,7 @@ import CompanyDetails from "./components/CompanyDetails";
 import { Container } from "react-bootstrap";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
+import Favorites from "./components/Favorites";
 function App() {
   return (
     <div className="App">
@@ -12,6 +13,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route exact path={"/"} element={<Homepage />} />
+            <Route exact path={"/favorites"} element={<Favorites />} />
             <Route path={"/:company"} element={<CompanyDetails />} />
           </Routes>
         </BrowserRouter>

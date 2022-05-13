@@ -5,7 +5,14 @@ const favSlice = createSlice({
   initialState: {
     favCompanies: [],
   },
-  reducers: {},
+  reducers: {
+    addToFav: (state, action) => {
+      return {
+        favCompanies: [...state.favCompanies],
+      };
+    },
+  },
 });
 
 export default favSlice.reducer;
+export const { addToFav } = favSlice.actions;

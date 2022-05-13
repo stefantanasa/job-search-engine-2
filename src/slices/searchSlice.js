@@ -22,7 +22,7 @@ const searchSlice = createSlice({
   name: "search",
   initialState: {
     searchTerm: "",
-    searchResult: [],
+    searchResult: ["search Result []"],
     jobCategory: "",
   },
   reducers: {},

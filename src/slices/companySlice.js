@@ -3,9 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const companySlice = createSlice({
   name: "company",
   initialState: {
-    companyJobs: [],
+    jobs: [],
   },
-  reducers: {},
+  reducers: {
+    searchJobs: () => {
+      console.log("Search jobs");
+    },
+  },
 });
 
 export default companySlice.reducer;

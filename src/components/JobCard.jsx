@@ -1,7 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { addToFav } from "../slices/favSlice";
 
-const JobCard = ({ job }) => {
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToFavProp: () => {
+      dispatch(addToFav());
+    },
+  };
+};
+
+const JobCard = ({ job, addToFavProp }) => {
   return (
     <ul className="cards">
       <li>
@@ -33,9 +47,9 @@ const JobCard = ({ job }) => {
               >
                 {job.company_name}
               </h3>
-              <i className="bi bi-heart"></i>
-              <i className="bi bi-heart-fill"></i>
             </Link>
+            <i className="bi bi-heart" onClick={() => addToFavProp()}></i>
+
             <p></p>
           </div>
         </span>
@@ -44,4 +58,4 @@ const JobCard = ({ job }) => {
   );
 };
 
-export default JobCard;
+export default connect(mapStateToProps, mapDispatchToProps)(JobCard);

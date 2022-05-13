@@ -3,6 +3,11 @@ import Results from "./Results";
 import SearchBar from "./SearchBar";
 import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  return { searchResult: state.search.searchResult };
+};
 
 const Homepage = () => {
   const [searchResult, setSearchResult] = useState([]);
@@ -62,4 +67,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default connect(mapStateToProps)(Homepage);
