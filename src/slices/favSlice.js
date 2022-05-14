@@ -8,11 +8,19 @@ const favSlice = createSlice({
   reducers: {
     addToFav: (state, action) => {
       return {
-        favCompanies: [...state.favCompanies],
+        favCompanies: [...state.favCompanies, action.payload],
+      };
+    },
+
+    removeFromFav: (state, action) => {
+      return {
+        favCompanies: state.favCompanies.filter(
+          (company, i) => i !== action.payload
+        ),
       };
     },
   },
 });
 
 export default favSlice.reducer;
-export const { addToFav } = favSlice.actions;
+export const { addToFav, removeFromFav } = favSlice.actions;

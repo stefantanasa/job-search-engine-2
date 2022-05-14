@@ -60,8 +60,8 @@ const Homepage = () => {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           category={category}
+          searchResult={searchResult}
         />
-        <Results searchResult={searchResult} />
       </div>
     </Container>
   );

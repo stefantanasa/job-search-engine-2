@@ -1,60 +1,44 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { addToFav } from "../slices/favSlice";
-
+import { addToFav, removeFromFav } from "../slices/favSlice";
+import { useState } from "react";
 const mapStateToProps = (state) => {
   return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addToFavProp: () => {
-      dispatch(addToFav());
+    addToFavProp: (company) => {
+      dispatch(addToFav(company));
+    },
+    removeFromFavProp: (index) => {
+      dispatch(removeFromFav(index));
     },
   };
 };
 
-const JobCard = ({ job, addToFavProp }) => {
-  return (
-    <ul className="cards">
-      <li>
-        <span className="card">
-          <img
-            src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-            className="card__image"
-            alt=""
-          />
-          <div className="card__overlay">
-            <div className="card__header">
-              <svg className="card__arc" xmlns="http://www.w3.org/2000/svg">
-                <path />
-              </svg>
-              <img
-                className="card__thumb"
-                src="https://images.unsplash.com/photo-1586473219010-2ffc57b0d282?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
-                alt=""
-              />
-              <div className="card__header-text">
-                <h3 className="card__title">{job.title}</h3>
-                <span className="card__status">{job.publicat}</span>
-              </div>
-            </div>
-            <Link to={`/${job.company_name}`}>
-              <h3
-                style={{ textDecoration: "none" }}
-                className="card__description"
-              >
-                {job.company_name}
-              </h3>
-            </Link>
-            <i className="bi bi-heart" onClick={() => addToFavProp()}></i>
+const JobCard = ({ job, addToFavProp, removeFromFavProp, index }) => {
+  const [liked, setLiked] = useState(false);
 
-            <p></p>
-          </div>
-        </span>
-      </li>
-    </ul>
+  return (
+    <div className="card" style={{ width: "18rem" }}>
+      <div className="card-body">
+        <h5 className="card-title">{job.title}</h5>
+        <Link to={`/${job.company_name}`}>
+          <h6 className="card-subtitle mb-2 text-muted">{job.company_name}</h6>
+        </Link>
+
+        <p>{job.publicat}</p>
+        <i
+          className={liked ? "bi bi-heart-fill" : "bi bi-heart"}
+          onClick={() => {
+            addToFavProp(job.company_name);
+            setLiked(true);
+          }}
+        ></i>
+      </div>
+    </div>
   );
 };
 
