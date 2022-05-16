@@ -4,24 +4,25 @@ import JobCard from "./JobCard";
 import { connect } from "react-redux";
 import { getResult } from "../slices/searchSlice";
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  searchResultProp: state.search.searchResult,
+});
 const mapDispatchToProps = (dispatch) => ({
   getSearchResultProp: (query) => {
     dispatch(getResult(query));
   },
 });
 
-const Results = ({ searchResult, getSearchResultProp }) => {
-  useEffect(() => {
-    getSearchResultProp("dev");
-  }, []);
+const Results = ({ searchResult, getSearchResultProp, searchResultProp }) => {
+  useEffect(() => {}, []);
 
   return (
     <Container>
       <Row>
-        {searchResult.map((job, index) => (
-          <JobCard key={job._id} job={job} index={index} />
-        ))}
+        {searchResult &&
+          searchResult.map((job, index) => (
+            <JobCard key={job._id} job={job} index={index} />
+          ))}
       </Row>
     </Container>
   );

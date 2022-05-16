@@ -43,9 +43,9 @@ const Homepage = () => {
       console.log("❌ There is an error: ", error);
     }
   };
-  console.log("Search result: ", searchResult);
+
   useEffect(() => {
-    handleCategory();
+    // handleCategory();
     console.log(category);
   }, []);
   return (

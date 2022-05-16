@@ -3,17 +3,29 @@ import { Form, FormControl, Button } from "react-bootstrap";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import Results from "./Results";
 import { connect } from "react-redux";
-import { getSearchTerm } from "../slices/searchSlice";
+import { getTerm } from "../slices/searchSlice";
+import { getResult } from "./../slices/searchSlice";
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  return {
+    searchTermProp: state.search.searchTerm,
+    searchResultProp: state.search.searchResult,
+  };
+};
 const mapDispatchToProps = (dispatch) => ({
   getSearchTermProp: (e) => {
-    dispatch(getSearchTerm(e));
+    dispatch(getTerm(e));
+  },
+  getSearchResultProp: (query) => {
+    dispatch(getResult(query));
   },
 });
 
 const SearchBar = ({
+  searchResultProp,
+  getSearchResultProp,
   getSearchTermProp,
+  searchTermProp,
   handleSearch,
   setSearchTerm,
   searchTerm,
@@ -43,7 +55,7 @@ const SearchBar = ({
       </DropdownButton> */}
         <button
           onClick={() => {
-            handleSearch(searchTerm);
+            getSearchResultProp(searchTermProp);
           }}
           className="btn btn-outline-success my-2 my-sm-0"
           type="submit"
@@ -52,7 +64,7 @@ const SearchBar = ({
         </button>
       </div>
       <div className="row">
-        <Results searchResult={searchResult} />
+        <Results searchResult={searchResultProp} />
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ export const getResult = createAsyncThunk(
   async (query, thunkAPI) => {
     try {
       let response = await fetch(
-        `"https://strive-jobs-api.herokuapp.com/jobs?search=${query}&limit=10"`
+        `https://strive-jobs-api.herokuapp.com/jobs?search=${query}&limit=10`
       );
       if (response.ok) {
         let data = await response.json();
@@ -24,7 +24,7 @@ const searchSlice = createSlice({
   name: "search",
   initialState: {
     searchTerm: "",
-    searchResult: ["search Result []"],
+    searchResult: [],
     jobCategory: "",
     loading: false,
     error: false,
@@ -32,7 +32,7 @@ const searchSlice = createSlice({
   reducers: {
     getTerm: (state, action) => ({
       ...state,
-      getSearchTerm: action.payload,
+      searchTerm: action.payload,
     }),
   },
   extraReducers: {
@@ -46,7 +46,7 @@ const searchSlice = createSlice({
       return {
         ...state,
         loading: false,
-        searchResult: action.payload,
+        searchResult: action.payload.data,
       };
     },
     [getResult.rejected]: (state, action) => {
@@ -60,4 +60,4 @@ const searchSlice = createSlice({
 });
 
 export default searchSlice.reducer;
-export const { getSearchTerm } = searchSlice.actions;
+export const { getTerm } = searchSlice.actions;
