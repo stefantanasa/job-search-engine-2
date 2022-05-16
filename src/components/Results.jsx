@@ -4,7 +4,7 @@ import JobCard from "./JobCard";
 import { connect } from "react-redux";
 import { getResult } from "../slices/searchSlice";
 
-const mapStateToProps = (state) => {};
+const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => {
 getSearchResultProp: (url) => {
   dispatch(getResult(url));
@@ -12,7 +12,7 @@ getSearchResultProp: (url) => {
 useEffect(()=>{
   props.getSearchResultProp("https://strive-jobs-api.herokuapp.com/jobs?search=dev&limit=10"),[]
 })
-const Results = ({ searchResult, getSearchResultProp }) => {
+const Results = ({ searchResult }) => {
   return (
     <Container>
       <Row>
