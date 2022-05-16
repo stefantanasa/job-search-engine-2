@@ -1,12 +1,18 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import JobCard from "./JobCard";
+import { connect } from "react-redux";
 
-const Results = ({ searchResult }) => {
+const mapStateToProps = (state) => {};
+const mapDispatchToProps = (dispatch) => {
+getSearchResultProp: (url) => {
+  dispatch(getResult(url));
+};
+const Results = ({ getSearchResultProp }) => {
   return (
     <Container>
       <Row>
-        {searchResult.map((job, index) => (
+        {getSearchResultProp("https://strive-jobs-api.herokuapp.com/jobs?search=$dev&limit=10").map((job, index) => (
           <JobCard key={job._id} job={job} index={index} />
         ))}
       </Row>
@@ -14,4 +20,4 @@ const Results = ({ searchResult }) => {
   );
 };
 
-export default Results;
+export default connect(mapStateToProps, mapDispatchToProps)(Results);
