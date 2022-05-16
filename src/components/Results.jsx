@@ -5,14 +5,17 @@ import { connect } from "react-redux";
 import { getResult } from "../slices/searchSlice";
 
 const mapStateToProps = (state) => ({});
-const mapDispatchToProps = (dispatch) => {
-getSearchResultProp: (url) => {
-  dispatch(getResult(url));
-};
-useEffect(()=>{
-  props.getSearchResultProp("https://strive-jobs-api.herokuapp.com/jobs?search=dev&limit=10"),[]
-})
-const Results = ({ searchResult }) => {
+const mapDispatchToProps = (dispatch) => ({
+  getSearchResultProp: (query) => {
+    dispatch(getResult(query));
+  },
+});
+
+const Results = ({ searchResult, getSearchResultProp }) => {
+  useEffect(() => {
+    getSearchResultProp("dev");
+  }, []);
+
   return (
     <Container>
       <Row>

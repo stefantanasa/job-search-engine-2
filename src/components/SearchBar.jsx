@@ -2,7 +2,18 @@ import React from "react";
 import { Form, FormControl, Button } from "react-bootstrap";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import Results from "./Results";
+import { connect } from "react-redux";
+import { getSearchTerm } from "../slices/searchSlice";
+
+const mapStateToProps = (state) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  getSearchTermProp: (e) => {
+    dispatch(getSearchTerm(e));
+  },
+});
+
 const SearchBar = ({
+  getSearchTermProp,
   handleSearch,
   setSearchTerm,
   searchTerm,
@@ -18,7 +29,7 @@ const SearchBar = ({
           placeholder="Search job"
           aria-label="Search"
           onChange={(e) => {
-            setSearchTerm(e.target.value);
+            getSearchTermProp(e.target.value);
             console.log(e.target.value);
           }}
         />
@@ -47,4 +58,4 @@ const SearchBar = ({
   );
 };
 
-export default SearchBar;
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

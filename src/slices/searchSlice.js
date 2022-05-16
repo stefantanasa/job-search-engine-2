@@ -2,9 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getResult = createAsyncThunk(
   "search/getResult",
-  async (url, thunkAPI) => {
+  async (query, thunkAPI) => {
     try {
-      let response = await fetch(url);
+      let response = await fetch(
+        `"https://strive-jobs-api.herokuapp.com/jobs?search=${query}&limit=10"`
+      );
       if (response.ok) {
         let data = await response.json();
         return data;
@@ -27,7 +29,12 @@ const searchSlice = createSlice({
     loading: false,
     error: false,
   },
-  reducers: {},
+  reducers: {
+    getTerm: (state, action) => ({
+      ...state,
+      getSearchTerm: action.payload,
+    }),
+  },
   extraReducers: {
     [getResult.pending]: (state, action) => {
       return {
@@ -53,3 +60,4 @@ const searchSlice = createSlice({
 });
 
 export default searchSlice.reducer;
+export const { getSearchTerm } = searchSlice.actions;
