@@ -24,9 +24,32 @@ const searchSlice = createSlice({
     searchTerm: "",
     searchResult: ["search Result []"],
     jobCategory: "",
+    loading: false,
+    error: false,
   },
   reducers: {},
-  extraReducers: {},
+  extraReducers: {
+    [getResult.pending]: (state, action) => {
+      return {
+        ...state,
+        loading: true,
+      };
+    },
+    [getResult.fulfilled]: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        searchResult: action.payload,
+      };
+    },
+    [getResult.rejected]: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+    },
+  },
 });
 
 export default searchSlice.reducer;
