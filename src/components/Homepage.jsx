@@ -43,10 +43,11 @@ const Homepage = () => {
       console.log("❌ There is an error: ", error);
     }
   };
+  const dog = { breed: "poodle", age: 6 };
 
   useEffect(() => {
     // handleCategory();
-    console.log(category);
+    // console.log(category);
   }, []);
   return (
     <Container
@@ -56,11 +57,11 @@ const Homepage = () => {
       <div>
         <SearchBar
           className="bg-dark"
-          handleSearch={handleSearch}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          category={category}
-          searchResult={searchResult}
+          // handleSearch={handleSearch}
+          // searchTerm={searchTerm}
+          // setSearchTerm={setSearchTerm}
+          // category={category}
+          // searchResult={searchResult}
         />
       </div>
     </Container>

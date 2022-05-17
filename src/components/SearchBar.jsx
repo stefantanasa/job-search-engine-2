@@ -26,11 +26,11 @@ const SearchBar = ({
   getSearchResultProp,
   getSearchTermProp,
   searchTermProp,
-  handleSearch,
-  setSearchTerm,
-  searchTerm,
-  category,
-  searchResult,
+  // handleSearch,
+  // setSearchTerm,
+  // searchTerm,
+  // category,
+  // searchResult,
 }) => {
   return (
     <div className="container">
